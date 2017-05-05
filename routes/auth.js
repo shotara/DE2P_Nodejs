@@ -5,7 +5,7 @@ module.exports = function() {
 
   // login method
   route.get('/login', function(req,res) {
-    res.send("login page");
+    res.render('auth/login');
   });
 
   // join method

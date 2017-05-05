@@ -3,7 +3,7 @@ module.exports = function() {
 
   // write method
   route.get('/writeFeed', function(req,res) {
-    res.send("Write Feed");
+    res.render('feed/write');
   });
 
   // set method

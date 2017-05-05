@@ -1,0 +1,10 @@
+extends ../layout
+block content
+  h1 Write Feed Page
+  form(action='/auth/login')
+    p
+      input(type='text', name='username', placeholder='username')
+    p
+      input(type='password', name='password', placeholder='password')
+    p
+      input(type='submit')
