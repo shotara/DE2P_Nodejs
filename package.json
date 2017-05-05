@@ -1,0 +1,26 @@
+{
+  "name": "de2p_nodejs",
+  "version": "1.0.0",
+  "description": "Deep Serverside Nodejs migration.",
+  "main": "app_de2p.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shotara/DE2P_Nodejs.git"
+  },
+  "author": "Allen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shotara/DE2P_Nodejs/issues"
+  },
+  "homepage": "https://github.com/shotara/DE2P_Nodejs#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "jade": "^1.11.0",
+    "pbkdf2-password": "^1.2.1",
+    "sha256": "^0.2.0"
+  }
+}
