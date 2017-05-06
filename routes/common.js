@@ -1,9 +1,11 @@
-module.exports = function() {
+module.exports = function(app) {
   var route = require('express').Router();
+
+  // app.use('/', express.static(__dirname + "/page/html/index.html"));
 
   // main method
   route.get('/', function(req,res) {
-    res.render('page/jade/common/index');
+    res.render('page/index');
   });
 
   return route;

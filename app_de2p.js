@@ -5,7 +5,7 @@ var conn = require('./config/db')();
 // router connect
 
 // Main Page
-var common = require('./routes/common.js')();
+var common = require('./routes/common.js')(app);
 app.use('/', common);
 
 // Auth Page
@@ -15,6 +15,12 @@ app.use('/auth', auth);
 // Feed Page
 var feed = require('./routes/feed.js')();
 app.use('/feed', feed);
+
+
+// Editor Test
+app.get('/editor', function(rep,res) {
+  res.render('editor/ckeditor_4.6.2_full_codemirror/ckeditor/samples/index');
+});
 
 // port listening
 app.listen(3000, function() {

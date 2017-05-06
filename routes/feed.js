@@ -3,7 +3,7 @@ module.exports = function() {
 
   // write method
   route.get('/writeFeed', function(req,res) {
-    res.render('page/jade/feed/write');
+    res.render('page/feed/write');
   });
 
   // set method
