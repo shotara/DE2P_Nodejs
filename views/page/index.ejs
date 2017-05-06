@@ -3,19 +3,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link rel="/common/commonHeader.ejs">
+<%- include commonHeader %>
+<!--<link rel="/page/common/commonHeader.ejs">-->
 
 </head>
 <body>
 
-<link rel="/common/commonNav.jsp">
-<link rel="/common/commonSubNav.jsp">
+<%- include commonNav %>
+
 
 	<section id="indexFeed" class="section" data-type="feed">
 	<div class="container">
 		<div class="list" data-type="feed">
 			<c:forEach var="i" items="${requestScope.outputFeedList}">
-			<div class="row<c:if test="${i.outputPostType == 1}"> notice</c:if>" onclick="Feed.goView('${i.outputFeedNo}')">
+		<!--	<div class="row<c:if test="${i.outputPostType == 1}"> notice</c:if>" onclick="Feed.goView('${i.outputFeedNo}')"> -->
 			</div>
 			</c:forEach>
 		</div>
