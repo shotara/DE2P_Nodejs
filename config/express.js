@@ -9,6 +9,7 @@ module.exports = function() {
   app.set('view engine', 'ejs');
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use('/editor/test', express.static(__dirname + "/../views/editor"));
+  app.use('/page', express.static(__dirname + "/../views/page"));
   app.use('/css', express.static(__dirname + "/../views/css"));
   app.use('/js', express.static(__dirname + "/../views/js"));
 
