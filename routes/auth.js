@@ -5,7 +5,7 @@ module.exports = function() {
 
   // login method
   route.get('/login', function(req,res) {
-    res.render('auth/login');
+    res.render('page/jade/auth/login');
   });
 
   // join method

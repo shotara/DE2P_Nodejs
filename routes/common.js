@@ -3,7 +3,7 @@ module.exports = function() {
 
   // main method
   route.get('/', function(req,res) {
-    res.send("DE2P, the technical blog.");
+    res.render('page/jade/common/index');
   });
 
   return route;
