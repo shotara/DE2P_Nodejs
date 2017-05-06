@@ -16,11 +16,9 @@ app.use('/auth', auth);
 var feed = require('./routes/feed.js')();
 app.use('/feed', feed);
 
-
-// Editor Test
-app.get('/editor', function(rep,res) {
-  res.render('editor/ckeditor_4.6.2_full_codemirror/ckeditor/samples/index');
-});
+// ckeditor Test
+var editor = require('./routes/editor.js')();
+app.use('/editor', editor);
 
 // port listening
 app.listen(3000, function() {

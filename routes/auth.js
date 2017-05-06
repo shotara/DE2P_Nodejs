@@ -6,6 +6,8 @@ module.exports = function() {
   // login method
   route.get('/login', function(req,res) {
     res.render('page/auth/login');
+
+    var model = require('../models/authModel')();
   });
 
   // join method
