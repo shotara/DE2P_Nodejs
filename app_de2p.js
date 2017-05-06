@@ -16,10 +16,14 @@ app.use('/auth', auth);
 var feed = require('./routes/feed.js')();
 app.use('/feed', feed);
 
-
-// Editor Test
-app.get('/editor', function(rep,res) {
+// ckeditor Test
+app.get('/editor/ckeditor', function(rep,res) {
   res.render('editor/ckeditor_4.6.2_full_codemirror/ckeditor/samples/index');
+});
+
+// codemirror Test
+app.get('/editor/codemirror', function(rep,res) {
+  res.render('editor/ckeditor_4.6.2_full_codemirror/ckeditor/plugins/codemirror-5.23.0/mode/clike/index');
 });
 
 // port listening
