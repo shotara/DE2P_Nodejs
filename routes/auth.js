@@ -8,7 +8,7 @@ module.exports = function() {
     <h1>Login</h1>
     <form action="/auth/login" method="post">
       <p>
-        <input type="text" name="username" placeholder="username">
+        <input type="text" name="inputMemberEmail" placeholder="email">
       </p>
       <p>
         <input type="password" name="password" placeholder="password">
@@ -23,11 +23,32 @@ module.exports = function() {
 
   route.post('/login', function(req,res) {
     memberController.login(req,res);
-  })
+  });
 
   // join method
   route.get('/join', function(req,res) {
-    res.send("join page");
+    var output = `
+    <h1>Login</h1>
+    <form action="/auth/join" method="post">
+      <p>
+        <input type="text" name="inputMemberEmail" placeholder="email">
+      </p>
+      <p>
+        <input type="text" name="inputMemberName" placeholder="nickname">
+      </p>
+      <p>
+        <input type="password" name="password" placeholder="password">
+      </p>
+      <p>
+        <input type="submit">
+      </p>
+    </form>
+    `;
+    res.send(output);
+  });
+
+  route.post('/join', function(req,res) {
+    memberController.join(req,res);
   });
 
   return route;
