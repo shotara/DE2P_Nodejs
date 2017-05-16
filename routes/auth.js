@@ -4,20 +4,27 @@ module.exports = function() {
 
   // login method
   route.get('/login', function(req,res) {
-    var output = `
-    <h1>Login</h1>
-    <form action="/auth/login" method="post">
-      <p>
-        <input type="text" name="inputMemberEmail" placeholder="email">
-      </p>
-      <p>
-        <input type="password" name="password" placeholder="password">
-      </p>
-      <p>
-        <input type="submit">
-      </p>
-    </form>
-    `;
+
+    if(req.session.deepMemberNo == null) {
+      var output = `
+      <h1>Login</h1>
+      <form action="/auth/login" method="post">
+        <p>
+          <input type="text" name="inputMemberEmail" placeholder="email">
+        </p>
+        <p>
+          <input type="password" name="password" placeholder="password">
+        </p>
+        <p>
+          <input type="submit">
+        </p>
+      </form>
+      `;
+    } else {
+      var output = `
+      <h1>Hello, ${req.session.deepMemberNo}</h1>
+      <a href="/auth/logout">logout</a>`;
+    }
     res.send(output);
   });
 
@@ -49,6 +56,10 @@ module.exports = function() {
 
   route.post('/join', function(req,res) {
     memberController.join(req,res);
+  });
+
+  route.get('/logout', function(req,res) {
+    memberController.logout(req,res);
   });
 
   return route;
