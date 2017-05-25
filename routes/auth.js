@@ -35,7 +35,7 @@ module.exports = function() {
   // join method
   route.get('/join', function(req,res) {
     var output = `
-    <h1>Login</h1>
+    <h1>Join</h1>
     <form action="/auth/join" method="post">
       <p>
         <input type="text" name="inputMemberEmail" placeholder="email">
@@ -58,8 +58,18 @@ module.exports = function() {
     memberController.join(req,res);
   });
 
+  // logout
   route.get('/logout', function(req,res) {
     memberController.logout(req,res);
+  });
+
+  // modify method
+  route.get('/modify', function(req,res) {
+    memberController.getProfile(req,res);
+  });
+
+  route.post('/modify', function(req,res) {
+    memberController.setProfile(req,res);
   });
 
   return route;

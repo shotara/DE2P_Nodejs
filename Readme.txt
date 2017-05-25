@@ -20,3 +20,9 @@ Deep Serverside Nodejs migration.
   로그아웃 추가
   memberUid 추가
   쿼리문들을 config/sql로 빼서 정리
+
+
+5/25  ALLEN  ver 0.2.6
+
+  암호화 복호화 에러 수정 (gibberish라는 js로 수정)
+  setProfile Front 적용 (Back 필요)

@@ -1,5 +1,14 @@
-exports.getMember = function() {
-  var sql = 'SELECT * FROM deep_member WHERE deepMemberEmail=? AND deepMemberPassword=? AND deepMemberStatus=1';
+exports.getMember = function(type) {
+  var sql ="";
+  switch(type) {
+    case 1:
+      sql = 'SELECT * FROM deep_member WHERE deepMemberEmail=? AND deepMemberPassword=? AND deepMemberStatus=1';
+      break;
+    case 2:
+      sql = 'SELECT * FROM deep_member WHERE deepMemberNo=?';
+      break;
+  }
+
   return sql;
 }
 
@@ -25,6 +34,15 @@ exports.addMemberUid = function() {
   var sql = `
     INSERT INTO deep_member_uid(deepMemberNo, deepMemberUid)
     VALUES((SELECT deepMemberNo FROM deep_member WHERE deepMemberEmail=?), ?)
+  `;
+  return sql;
+}
+
+exports.setMemberUid = function() {
+  var sql = `
+    UPDATE deep_member
+    SET deepMemberMajor=?, deepMemberCareer=?, deepMemberEmail=?, deepMemberName=?
+    WHERE deepMemberNo=? AND deepMemberPassword=?
   `;
   return sql;
 }
