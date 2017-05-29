@@ -5,7 +5,7 @@ var conn = require('./config/db')();
 // router connect
 
 // Main Page
-var common = require('./routes/common.js')(app);
+var common = require('./routes/common.js')();
 app.use('/', common);
 
 // Auth Page
@@ -15,6 +15,10 @@ app.use('/auth', auth);
 // Feed Page
 var feed = require('./routes/feed.js')();
 app.use('/feed', feed);
+
+// Upload
+var upload = require('./routes/upload.js')();
+app.use('/upload', upload);
 
 // ckeditor Test
 var editor = require('./routes/editor.js')();

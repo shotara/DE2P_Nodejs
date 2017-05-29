@@ -198,6 +198,11 @@ exports.getProfile = function(map, req, res) {
             <input type="submit">
           </p>
         </form>
+
+        <form action="/upload/memberImg" method='post' enctype="multipart/form-data">
+          <input type='file' name='img'>
+          <input type='submit' value="완료">
+        </form>
       `;
       res.send(output);
     }

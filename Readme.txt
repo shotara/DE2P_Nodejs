@@ -31,3 +31,10 @@ Deep Serverside Nodejs migration.
 
   setProfile 완료.
   로그인 할때 memberUid 세션 추가
+
+5/29  ALLEN  ver 0.2.8
+
+  nodejs - s3 연동.
+    memberImg 사진업로드하면 s3에 등록
+  views/temp 폴더 생성.
+  config/key.js 필요.

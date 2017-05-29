@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = function() {
   var route = require('express').Router();
 
   // app.use('/', express.static(__dirname + "/page/html/index.html"));
