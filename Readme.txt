@@ -26,3 +26,8 @@ Deep Serverside Nodejs migration.
 
   암호화 복호화 에러 수정 (gibberish라는 js로 수정)
   setProfile Front 적용 (Back 필요)
+
+5/29  ALLEN  ver 0.2.7
+
+  setProfile 완료.
+  로그인 할때 memberUid 세션 추가

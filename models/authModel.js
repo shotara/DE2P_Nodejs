@@ -7,7 +7,7 @@ var async = require('async');
 
 exports.loginMember = function(map,req,res) {
 
-  var sql = member.getMember(1);
+  var sql = member.getMember(3);
   var param = [
     map.inputMemberEmail,
     map.inputMemberPassword
@@ -25,7 +25,8 @@ exports.loginMember = function(map,req,res) {
       var map = {
         sessionMemberNo : result[0].deepMemberNo,
         sessionMemberLevel : result[0].deepMemberLevel,
-        sessionMemberImage : result[0].deepMemberImage
+        sessionMemberImage : result[0].deepMemberImage,
+        sessionMemberUid : result[0].deepMemberUid
       }
       common.saveSession(map, req, res);
 
@@ -71,6 +72,8 @@ exports.joinMember = function(map, req, res) {
             map.inputMemberStatus,
             map.inputMemberLevel,
             map.inputMemberCreateDate,
+            map.inputMemberMajor,
+            map.inputMemberCareer,
             map.inputMemberEmail,
             map.inputMemberName,
             map.inputMemberPassword,
@@ -181,11 +184,11 @@ exports.getProfile = function(map, req, res) {
           </p>
           <p>
             Major
-            <input type="text" name="inputMemberMajor" value="`+result[0].deepMemberMajor+`">
+            <input type="text" name="inputMemberMajor" value="`+crypto.decrypt(key.keyAes(),result[0].deepMemberMajor)+`">
           </p>
           <p>
             Career
-            <input type="text" name="inputMemberCareer" value="`+result[0].deepMemberCareer+`">
+            <input type="text" name="inputMemberCareer" value="`+crypto.decrypt(key.keyAes(),result[0].deepMemberCareer)+`">
           </p>
           <p>
             Password
@@ -207,11 +210,10 @@ exports.setMember = function(map, req, res) {
     function(callback) {
       conn.beginTransaction(function(err) {
         if(err) { throw err; }
-        var sql = member.setMember();
+        var sql = member.setMember(1);
         var param = [
           map.inputMemberMajor,
           map.inputMemberCareer,
-          map.inputMemberEmail,
           map.inputMemberName,
           map.inputMemberNo,
           map.inputMemberPassword

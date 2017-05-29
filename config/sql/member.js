@@ -7,6 +7,9 @@ exports.getMember = function(type) {
     case 2:
       sql = 'SELECT * FROM deep_member WHERE deepMemberNo=?';
       break;
+    case 3:
+      sql = 'SELECT dm.* , dmu.deepMemberUid as deepMemberUid FROM deep_member dm, deep_member_uid dmu WHERE dm.deepMemberEmail=? AND dm.deepMemberPassword=? AND dm.deepMemberStatus=1 AND dm.deepMemberNo=dmu.deepMemberNo';
+      break;
   }
 
   return sql;
@@ -24,8 +27,8 @@ exports.checkMember = function() {
 
 exports.addMember = function() {
   var sql = `
-    INSERT INTO deep_member(deepMemberStatus, deepMemberLevel, deepMemberCreateDate, deepMemberEmail, deepMemberName, deepMemberPassword, deepMemberImage)
-    VALUES(?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO deep_member(deepMemberStatus, deepMemberLevel, deepMemberCreateDate, deepMemberMajor, deepMembercareer, deepMemberEmail, deepMemberName, deepMemberPassword, deepMemberImage)
+    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
   return sql;
 }
@@ -45,4 +48,25 @@ exports.setMemberUid = function() {
     WHERE deepMemberNo=? AND deepMemberPassword=?
   `;
   return sql;
+}
+
+exports.setMember = function(type) {
+  var sql='';
+  switch (type) {
+    case 1: sql = `
+              UPDATE deep_member
+              SET deepMemberMajor=?, deepMemberCareer=?, deepMemberName=?
+              WHERE deepMemberNo=? AND deepMemberPassword=?
+              `;
+      return  sql;
+    case 2: sql = `
+              UPDATE deep_member
+              SET deepMemberMajor=?, deepMemberCareer=?, deepMemberName=?, deepMemberPassword=?
+              WHERE deepMemberNo=? AND deepMemberPassword=?
+              `;
+      return  sql;
+
+    default:
+      return '';
+  }
 }

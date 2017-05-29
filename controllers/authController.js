@@ -50,11 +50,15 @@ exports.join = function(req, res) {
       var memberCreateDate = (new Date).getTime()/1000;
       var memberEmail = crypto.encrypt(key.keyAes(),common.serversideXSS(req.body.inputMemberEmail));
       var memberName = crypto.encrypt(key.keyAes(),common.serversideXSS(req.body.inputMemberName));
+      var memberMajor = crypto.encrypt(key.keyAes(),'');
+      var memberCareer = crypto.encrypt(key.keyAes(),'');
 
       var map = {
         inputMemberStatus : 1,
         inputMemberLevel : 1,
         inputMemberCreateDate : memberCreateDate,
+        inputMemberMajor : memberMajor,
+        inputMemberCareer : memberCareer,
         inputMemberEmail : memberEmail,
         inputMemberName : memberName,
         inputMemberPassword : hash,
@@ -114,7 +118,7 @@ exports.setProfile = function(req, res) {
 
     hasher(opts, function(err, pass, salt, hash) {
       var memberMajor = crypto.encrypt(key.keyAes(),common.serversideXSS(req.body.inputMemberMajor));
-      var memberCareer = crypto.encrypt(key.keyAes(),common.serversideXSS(req.body.inputMemberCarerr));
+      var memberCareer = crypto.encrypt(key.keyAes(),common.serversideXSS(req.body.inputMemberCareer));
       var memberEmail = crypto.encrypt(key.keyAes(),common.serversideXSS(req.body.inputMemberEmail));
       var memberName = crypto.encrypt(key.keyAes(),common.serversideXSS(req.body.inputMemberName));
 
