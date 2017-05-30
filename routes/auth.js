@@ -23,7 +23,12 @@ module.exports = function() {
     } else {
       var output = `
       <h1>Hello, ${req.session.deepMemberNo}</h1>
-      <a href="/auth/logout">logout</a>`;
+      <a href="/auth/logout">logout</a>
+
+      <a href="/auth/modify"><h1>수정</h1></a>
+      <img src="${req.session.deepMemberImage}" width="300" height="400">
+      `;
+
     }
     res.send(output);
   });

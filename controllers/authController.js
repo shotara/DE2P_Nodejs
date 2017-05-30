@@ -63,7 +63,7 @@ exports.join = function(req, res) {
         inputMemberName : memberName,
         inputMemberPassword : hash,
         inputMemberImage : -1,
-        inputMemberUid : createMemberUid(memberEmail,memberName,memberCreateDate)
+        inputMemberUid : common.serversideXSS(createMemberUid(memberEmail,memberName,memberCreateDate))
       };
 
       model.joinMember(map, req, res);
@@ -81,7 +81,8 @@ exports.logout = function(req, res) {
 }
 
 createMemberUid = function(a, b, c) {
-  return  String(a).substring(0,6) + String(b).substring(0,6) + String(c).substring(0,4);
+
+  return common.checkSpecialPattern(String(a)).substring(0,6) + common.checkSpecialPattern(String(b)).substring(0,6) + String(c).substring(0,4);
 }
 
 exports.getProfile = function(req, res) {

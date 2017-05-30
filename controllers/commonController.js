@@ -1,4 +1,3 @@
-var replaceall = require("replaceall");
 
 exports.saveSession = function(map, req, res) {
 
@@ -14,7 +13,40 @@ exports.saveSession = function(map, req, res) {
 }
 
 exports.serversideXSS =function(data){
-  //
+
+  data.replace(/</g,"&lt;");
+  data.replace(/>/g,"&gt;");
+  data.replace(/\\/g, "&#40;");
+  data.replace(/\\/g, "&#41;");
+  data.replace(/'/g, "&#39;");
+  data.replace(/"/g, "&#34;");
+  data.replace("eval\\((.*)\\)", "");
+  data.replace("[\\\"\\\'][\\s]*javascript:(.*)[\\\"\\\']", "\"\"");
+  data.replace(/script/g, "");
+  data.replace(/javascript/g, "x-javascript");
+  data.replace(/script/g, "x-script");
+  data.replace(/iframe/g, "x-iframe");
+  data.replace(/document/g, "x-document");
+  data.replace(/vbscript/g, "x-vbscript");
+  data.replace(/applet/g, "x-applet");
+  data.replace(/embed/g, "x-embed");  // embed 태그를 사용하지 않을 경우만
+  data.replace(/object/g, "x-object");    // object 태그를 사용하지 않을 경우만
+  data.replace(/frame/g, "x-frame");
+  data.replace(/grameset/g, "x-grameset");
+  data.replace(/layer/g, "x-layer");
+  data.replace(/bgsound/g, "x-bgsound");
+  data.replace(/alert/g, "x-alert");
+  data.replace(/onblur/g, "x-onblur");
+  data.replace(/onchange/g, "x-onchange");
+  data.replace(/onclick/g, "x-onclick");
+  data.replace(/ondblclick/g, "x-ondblclick");
+  data.replace(/enerror/g, "x-enerror");
+  data.replace(/onfocus/g, "x-onfocus");
+  data.replace(/onload/g, "x-onload");
+  data.replace(/onmouse/g, "x-onmouse");
+  data.replace(/onscroll/g, "x-onscroll");
+  data.replace(/onsubmit/g, "x-onsubmit");
+  data.replace(/onunload/g, "x-onunload");
 	// replaceall(/</g,"&lt;",data);
   // replaceall(/>/g,"&gt;",data);
 	// replaceall(/\\/g, "&#40;",data);
@@ -50,6 +82,12 @@ exports.serversideXSS =function(data){
 	// replaceall(/onunload/g, "x-onunload",data);
 
 	return data;
+}
+
+exports.checkSpecialPattern = function(str) {
+  var pattern_special = /[~!@\#$%<>^&*\()\-=+_\’]/gi;
+
+  return str.replace(pattern_special,"2");
 }
 
 exports.parameterCheck =function(data){

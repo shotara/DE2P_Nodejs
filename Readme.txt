@@ -38,3 +38,9 @@ Deep Serverside Nodejs migration.
     memberImg 사진업로드하면 s3에 등록
   views/temp 폴더 생성.
   config/key.js 필요.
+
+5/30  ALLEN ver 0.3.0
+
+  대망의 Member(Auth) Method 완료.
+  UploadController, Model, query 추가.
+  MemberUid, UploadEncryptFileName ->  AWS에 올라가는 String은 영문,숫자만 (commonController.checkSpecialPattern)

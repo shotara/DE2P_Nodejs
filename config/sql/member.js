@@ -65,7 +65,13 @@ exports.setMember = function(type) {
               WHERE deepMemberNo=? AND deepMemberPassword=?
               `;
       return  sql;
-
+    case 3: sql = `
+              UPDATE deep_member
+              SET deepMemberImage=?
+              WHERE deepMemberNo=?
+              `;
+      return sql;
+      
     default:
       return '';
   }

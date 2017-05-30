@@ -1,40 +1,91 @@
 var conn = require('../config/db')();
 var common = require('../controllers/commonController.js');
+var uploadCon = require('../controllers/uploadController.js');
 var member = require('../config/sql/member.js');
+var upload = require('../config/sql/upload.js');
 var key = require('../config/key.js');
 var crypto = require('../config/crypto.js');
 var async = require('async');
 
 exports.loginMember = function(map,req,res) {
 
-  var sql = member.getMember(3);
-  var param = [
-    map.inputMemberEmail,
-    map.inputMemberPassword
-  ]
+  async.waterfall([ // 순차적 실행
+    function(callback) {
+      var sql = member.getMember(3);
+      var param = [
+        map.inputMemberEmail,
+        map.inputMemberPassword
+      ]
 
-  conn.query(sql, param, function(err, result, feilds) {
-    if(err) {
-      console.log(err);
-      res.send('알수없는 문제가 발생하였습니다.');
-      return;
-    };
+      conn.query(sql, param, function(err, result, feilds) {
+        if(err) {
+          console.log(err);
+          res.send('알수없는 문제가 발생하였습니다.');
+          return;
+        };
 
-    if(result[0] != null) {
-      // session register
-      var map = {
-        sessionMemberNo : result[0].deepMemberNo,
-        sessionMemberLevel : result[0].deepMemberLevel,
-        sessionMemberImage : result[0].deepMemberImage,
-        sessionMemberUid : result[0].deepMemberUid
+        if(result[0] != null) {
+          callback(null, result[0]);
+        } else {
+          callback(null, '-2'); // 다음 waterfall로 이동
+        }
+      });
+    },
+    function(data, callback) {   // memberUid 추가
+      if(data != '-2') {
+        if(data.deepMemberImage != -1) {
+          var sql = upload.getUpload();
+          var param = [
+            data.deepMemberImage,
+          ]
+
+          conn.query(sql, param, function(err, result, feilds) {
+            if(err) {
+              console.log(err);
+              callback(err, '-2');
+            };
+
+            if(result[0]!=null) {
+              // session register
+              var uploadMap = {
+                deepMemberUid : data.deepMemberUid
+              }
+
+              var map = {
+                sessionMemberNo : data.deepMemberNo,
+                sessionMemberLevel : data.deepMemberLevel,
+                sessionMemberImage : uploadCon.getAWSKeyName(1, uploadMap) + result[0].deepUploadEncryptFileName,
+                sessionMemberUid : data.deepMemberUid
+              }
+              common.saveSession(map, req, res);
+
+              callback(null, '1');
+            } else {
+              callback(null, '-2'); // 다음 waterfall로 이동
+            }
+          });
+        } else {
+          var map = {
+            sessionMemberNo : data.deepMemberNo,
+            sessionMemberLevel : data.deepMemberLevel,
+            sessionMemberImage : data.deepMemberImage,
+            sessionMemberUid : data.deepMemberUid
+          }
+          common.saveSession(map, req, res);
+
+          callback(null, '1');
+        }
+      } else {
+        callback(null, data);
       }
-      common.saveSession(map, req, res);
-
+    }
+  ],function(err, result) {
+    if(result == 1) {
       req.session.save(function(){
         res.redirect('/auth/login');
       });
     } else {
-      res.send('로그인 실패!');
+      res.send('알수없는 문제가 발생하였습니다.');
     }
   });
 }
