@@ -1,11 +1,11 @@
 var conn = require('../config/db')();
-var common = require('../controllers/commonController.js');
-var uploadCon = require('../controllers/uploadController.js');
+var crypto = require('../config/crypto.js');
+var async = require('async');
 var member = require('../config/sql/member.js');
 var upload = require('../config/sql/upload.js');
 var key = require('../config/key.js');
-var crypto = require('../config/crypto.js');
-var async = require('async');
+var commonController = require('../controllers/commonController.js');
+var uploadController = require('../controllers/uploadController.js');
 
 exports.loginMember = function(map,req,res) {
 
@@ -54,10 +54,10 @@ exports.loginMember = function(map,req,res) {
               var map = {
                 sessionMemberNo : data.deepMemberNo,
                 sessionMemberLevel : data.deepMemberLevel,
-                sessionMemberImage : uploadCon.getAWSKeyName(1, uploadMap) + result[0].deepUploadEncryptFileName,
+                sessionMemberImage : uploadController.getAWSKeyName(1, uploadMap) + result[0].deepUploadEncryptFileName,
                 sessionMemberUid : data.deepMemberUid
               }
-              common.saveSession(map, req, res);
+              commonController.saveSession(map, req, res);
 
               callback(null, '1');
             } else {
@@ -71,7 +71,7 @@ exports.loginMember = function(map,req,res) {
             sessionMemberImage : data.deepMemberImage,
             sessionMemberUid : data.deepMemberUid
           }
-          common.saveSession(map, req, res);
+          commonController.saveSession(map, req, res);
 
           callback(null, '1');
         }
@@ -82,7 +82,7 @@ exports.loginMember = function(map,req,res) {
   ],function(err, result) {
     if(result == 1) {
       req.session.save(function(){
-        res.redirect('/auth/login');
+        res.redirect('/member/login');
       });
     } else {
       res.send('알수없는 문제가 발생하였습니다.');
@@ -224,7 +224,7 @@ exports.getProfile = function(map, req, res) {
     } else {
       var output = `
         <h1>Modify</h1>
-        <form action="/auth/modify" method="post">
+        <form action="/member/modify" method="post">
           <p>
             Mail
             <input type="text" name="inputMemberEmail" value="`+crypto.decrypt(key.keyAes(),result[0].deepMemberEmail)+`">

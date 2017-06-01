@@ -1,6 +1,6 @@
 module.exports = function() {
   var route = require('express').Router();
-  var memberController = require('../controllers/authController.js');
+  var memberController = require('../controllers/memberController.js');
 
   // login method
   route.get('/login', function(req,res) {
@@ -8,7 +8,7 @@ module.exports = function() {
     if(req.session.deepMemberNo == null) {
       var output = `
       <h1>Login</h1>
-      <form action="/auth/login" method="post">
+      <form action="/member/login" method="post">
         <p>
           <input type="text" name="inputMemberEmail" placeholder="email">
         </p>
@@ -23,9 +23,9 @@ module.exports = function() {
     } else {
       var output = `
       <h1>Hello, ${req.session.deepMemberNo}</h1>
-      <a href="/auth/logout">logout</a>
+      <a href="/member/logout">logout</a>
 
-      <a href="/auth/modify"><h1>수정</h1></a>
+      <a href="/member/modify"><h1>수정</h1></a>
       <img src="${req.session.deepMemberImage}" width="300" height="400">
       `;
 
@@ -41,7 +41,7 @@ module.exports = function() {
   route.get('/join', function(req,res) {
     var output = `
     <h1>Join</h1>
-    <form action="/auth/join" method="post">
+    <form action="/member/join" method="post">
       <p>
         <input type="text" name="inputMemberEmail" placeholder="email">
       </p>

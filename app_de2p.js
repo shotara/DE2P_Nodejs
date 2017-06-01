@@ -1,24 +1,22 @@
 var app = require('./config/express')();
-var conn = require('./config/db')();
-
 
 // router connect
 
 // Main Page
-var common = require('./routes/common.js')();
-app.use('/', common);
+var commonRouter = require('./routes/commonRouter.js')();
+app.use('/', commonRouter);
 
-// Auth Page
-var auth = require('./routes/auth.js')();
-app.use('/auth', auth);
+// Member Page
+var memberRouter = require('./routes/memberRouter.js')();
+app.use('/member', memberRouter);
 
 // Feed Page
-var feed = require('./routes/feed.js')();
-app.use('/feed', feed);
+var feedRouter = require('./routes/feedRouter.js')();
+app.use('/feed', feedRouter);
 
 // Upload
-var upload = require('./routes/upload.js')();
-app.use('/upload', upload);
+var uploadRouter = require('./routes/uploadRouter.js')();
+app.use('/upload', uploadRouter);
 
 // ckeditor Test
 var editor = require('./routes/editor.js')();

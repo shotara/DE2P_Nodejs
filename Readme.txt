@@ -44,3 +44,8 @@ Deep Serverside Nodejs migration.
   대망의 Member(Auth) Method 완료.
   UploadController, Model, query 추가.
   MemberUid, UploadEncryptFileName ->  AWS에 올라가는 String은 영문,숫자만 (commonController.checkSpecialPattern)
+
+
+6/1  ALLEN  ver 0.3.1
+
+  ReNaming 

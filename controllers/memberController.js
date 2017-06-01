@@ -1,9 +1,9 @@
-var model = require('../models/authModel');
 var pbkfd2Password = require('pbkdf2-password');
 var hasher = pbkfd2Password();
 var key = require('../config/key.js');
 var crypto = require('../config/crypto.js');
-var common = require('./commonController.js');
+var memberModel = require('../models/memberModel');
+var commonController = require('./commonController.js');
 
 exports.login = function(req, res) {
 
@@ -12,19 +12,19 @@ exports.login = function(req, res) {
     req.body.inputMemberEmail
   ]
 
-  if(common.parameterCheck(checkParam) == true) {
+  if(commonController.parameterCheck(checkParam) == true) {
     var opts = {
-      password : common.serversideXSS(req.body.password),
+      password : commonController.serversideXSS(req.body.password),
       salt : key.keySalt()
     }
 
     hasher(opts, function(err, pass, salt, hash) {
       var map = {
-        inputMemberEmail : crypto.encrypt(key.keyAes(),common.serversideXSS(req.body.inputMemberEmail)),
+        inputMemberEmail : crypto.encrypt(key.keyAes(),commonController.serversideXSS(req.body.inputMemberEmail)),
         inputMemberPassword : hash
         };
 
-      model.loginMember(map, req, res);
+      memberModel.loginMember(map, req, res);
     });
   } else {
     console.log('Parameter ERROR');
@@ -40,16 +40,16 @@ exports.join = function(req, res) {
     req.body.inputMemberName
   ]
 
-  if(common.parameterCheck(checkParam) == true) {
+  if(commonController.parameterCheck(checkParam) == true) {
     var opts = {
-      password : common.serversideXSS(req.body.password),
+      password : commonController.serversideXSS(req.body.password),
       salt : key.keySalt()
     }
 
     hasher(opts, function(err, pass, salt, hash) {
       var memberCreateDate = (new Date).getTime()/1000;
-      var memberEmail = crypto.encrypt(key.keyAes(),common.serversideXSS(req.body.inputMemberEmail));
-      var memberName = crypto.encrypt(key.keyAes(),common.serversideXSS(req.body.inputMemberName));
+      var memberEmail = crypto.encrypt(key.keyAes(),commonController.serversideXSS(req.body.inputMemberEmail));
+      var memberName = crypto.encrypt(key.keyAes(),commonController.serversideXSS(req.body.inputMemberName));
       var memberMajor = crypto.encrypt(key.keyAes(),'');
       var memberCareer = crypto.encrypt(key.keyAes(),'');
 
@@ -63,10 +63,10 @@ exports.join = function(req, res) {
         inputMemberName : memberName,
         inputMemberPassword : hash,
         inputMemberImage : -1,
-        inputMemberUid : common.serversideXSS(createMemberUid(memberEmail,memberName,memberCreateDate))
+        inputMemberUid : commonController.serversideXSS(createMemberUid(memberEmail,memberName,memberCreateDate))
       };
 
-      model.joinMember(map, req, res);
+      memberModel.joinMember(map, req, res);
     });
   } else {
     console.log('Parameter ERROR');
@@ -76,13 +76,13 @@ exports.join = function(req, res) {
 
 exports.logout = function(req, res) {
   req.session.destroy(function(err){
-    res.redirect('/auth/login');
+    res.redirect('/member/login');
    });
 }
 
 createMemberUid = function(a, b, c) {
 
-  return common.checkSpecialPattern(String(a)).substring(0,6) + common.checkSpecialPattern(String(b)).substring(0,6) + String(c).substring(0,4);
+  return commonController.checkSpecialPattern(String(a)).substring(0,6) + commonController.checkSpecialPattern(String(b)).substring(0,6) + String(c).substring(0,4);
 }
 
 exports.getProfile = function(req, res) {
@@ -92,7 +92,7 @@ exports.getProfile = function(req, res) {
     map = {
       inputMemberNo : sessionMemberNo
     }
-    model.getProfile(map, req, res);
+    memberModel.getProfile(map, req, res);
   } else {
     console.log('No Member');
     res.send("회원이아니다");
@@ -111,17 +111,17 @@ exports.setProfile = function(req, res) {
     console.log('No Member');
     res.send('noLogin');
   }
-  if(common.parameterCheck(map) == true) {
+  if(commonController.parameterCheck(map) == true) {
     var opts = {
-      password : common.serversideXSS(req.body.password),
+      password : commonController.serversideXSS(req.body.password),
       salt : key.keySalt()
     }
 
     hasher(opts, function(err, pass, salt, hash) {
-      var memberMajor = crypto.encrypt(key.keyAes(),common.serversideXSS(req.body.inputMemberMajor));
-      var memberCareer = crypto.encrypt(key.keyAes(),common.serversideXSS(req.body.inputMemberCareer));
-      var memberEmail = crypto.encrypt(key.keyAes(),common.serversideXSS(req.body.inputMemberEmail));
-      var memberName = crypto.encrypt(key.keyAes(),common.serversideXSS(req.body.inputMemberName));
+      var memberMajor = crypto.encrypt(key.keyAes(),commonController.serversideXSS(req.body.inputMemberMajor));
+      var memberCareer = crypto.encrypt(key.keyAes(),commonController.serversideXSS(req.body.inputMemberCareer));
+      var memberEmail = crypto.encrypt(key.keyAes(),commonController.serversideXSS(req.body.inputMemberEmail));
+      var memberName = crypto.encrypt(key.keyAes(),commonController.serversideXSS(req.body.inputMemberName));
 
       var map = {
         inputMemberNo : req.session.deepMemberNo,
@@ -132,7 +132,7 @@ exports.setProfile = function(req, res) {
         inputMemberPassword : hash,
       };
 
-      model.setMember(map, req, res);
+      memberModel.setMember(map, req, res);
     });
   } else {
     console.log('Parameter ERROR');

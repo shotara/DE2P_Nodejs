@@ -1,9 +1,5 @@
-var model = require('../models/uploadModel');
-var pbkfd2Password = require('pbkdf2-password');
-var hasher = pbkfd2Password();
+var uploadModel = require('../models/uploadModel');
 var key = require('../config/key.js');
-var crypto = require('../config/crypto.js');
-var common = require('../controllers/commonController.js');
 
 exports.uploadImage = function(req, res, map) {
 
@@ -20,7 +16,7 @@ exports.uploadImage = function(req, res, map) {
     inputUploadEncryptFileName : map.uploadEncryptFileName
   }
 
-  model.addUpload(map2, req, res);
+  uploadModel.addUpload(map2, req, res);
 
 }
 

@@ -1,10 +1,9 @@
-var conn = require('../config/db')();
-var common = require('../controllers/commonController.js');
-var upload = require('../config/sql/upload.js');
-var member = require('../config/sql/member.js');
-var key = require('../config/key.js');
 var crypto = require('../config/crypto.js');
 var async = require('async');
+var conn = require('../config/db')();
+var key = require('../config/key.js');
+var upload = require('../config/sql/upload.js');
+var member = require('../config/sql/member.js');
 
 exports.addUpload = function(map, req, res) {
 
@@ -115,7 +114,7 @@ exports.addUpload = function(map, req, res) {
       var output = `
         <script type="text/javascript">
           alert("업로드 성공!");
-          location.href="/auth/login"
+          location.href="/member/login"
         </script>
         `;
       res.send(output);

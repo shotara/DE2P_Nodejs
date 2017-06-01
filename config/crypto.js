@@ -1,5 +1,3 @@
-
-
 exports.encrypt = function(key, input) {
 
   GibberishAES.size(256);
