@@ -48,4 +48,9 @@ Deep Serverside Nodejs migration.
 
 6/1  ALLEN  ver 0.3.1
 
-  ReNaming 
+  ReNaming
+
+6/2   ALLEN   ver 0.3.2
+
+  writeFeed Method 완료. -> addFeed, addFeedSeries
+  예외처리에 대한 고찰 필요(비동기적 처리이기 때문에, 파라미터 체크, 세션체크등 할때도 고려해줘야한다.)

@@ -117,7 +117,11 @@ exports.joinMember = function(map, req, res) {
     function(data, callback) {
       if(data == 1) {
         conn.beginTransaction(function(err) {
-          if(err) { throw err; }
+          if(err) {
+            console.log(err);
+            callback(err, '-2');
+          }
+
           var sql = member.addMember();
           var param = [
             map.inputMemberStatus,
@@ -265,7 +269,11 @@ exports.setMember = function(map, req, res) {
   async.waterfall([ // 순차적 실행
     function(callback) {
       conn.beginTransaction(function(err) {
-        if(err) { throw err; }
+        if(err) {
+          console.log(err);
+          callback(err, '-2');
+        }
+
         var sql = member.setMember(1);
         var param = [
           map.inputMemberMajor,

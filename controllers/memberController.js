@@ -12,7 +12,7 @@ exports.login = function(req, res) {
     req.body.inputMemberEmail
   ]
 
-  if(commonController.parameterCheck(checkParam) == true) {
+  if(commonController.parameterCheck(checkParam)) {
     var opts = {
       password : commonController.serversideXSS(req.body.password),
       salt : key.keySalt()
@@ -40,7 +40,7 @@ exports.join = function(req, res) {
     req.body.inputMemberName
   ]
 
-  if(commonController.parameterCheck(checkParam) == true) {
+  if(commonController.parameterCheck(checkParam)) {
     var opts = {
       password : commonController.serversideXSS(req.body.password),
       salt : key.keySalt()
@@ -101,17 +101,18 @@ exports.getProfile = function(req, res) {
 
 exports.setProfile = function(req, res) {
 
+  if(!(req.session.deepMemberNo >0)) {
+    console.log('No Member');
+    res.send('noLogin');
+  }
+
   var checkParam = [
     req.body.password,
     req.body.inputMemberEmail,
     req.body.inputMemberName,
   ]
 
-  if(!(req.session.deepMemberNo >0)) {
-    console.log('No Member');
-    res.send('noLogin');
-  }
-  if(commonController.parameterCheck(map) == true) {
+  if(commonController.parameterCheck(checkParam)) {
     var opts = {
       password : commonController.serversideXSS(req.body.password),
       salt : key.keySalt()
@@ -138,5 +139,4 @@ exports.setProfile = function(req, res) {
     console.log('Parameter ERROR');
     res.send("입력이잘못됌요");
   }
-
 }

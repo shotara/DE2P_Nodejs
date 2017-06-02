@@ -71,7 +71,7 @@ exports.setMember = function(type) {
               WHERE deepMemberNo=?
               `;
       return sql;
-      
+
     default:
       return '';
   }
