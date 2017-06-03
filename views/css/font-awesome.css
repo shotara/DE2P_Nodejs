@@ -189,6 +189,9 @@
 .fa-search:before {
   content: "\f002";
 }
+.fa-envelope-o{
+  color:white;
+}
 .fa-envelope-o:before {
   content: "\f003";
 }
@@ -242,6 +245,10 @@
 }
 .fa-trash-o:before {
   content: "\f014";
+}
+
+.fa-home{
+  color :white;
 }
 .fa-home:before {
   content: "\f015";
@@ -378,6 +385,9 @@
 }
 .fa-tint:before {
   content: "\f043";
+}
+.fa-pencil-square-o{
+  color:white;
 }
 .fa-edit:before,
 .fa-pencil-square-o:before {
@@ -2210,6 +2220,9 @@
 }
 .fa-user-circle-o:before {
   content: "\f2be";
+}
+.fa-user-o{
+  color:white;
 }
 .fa-user-o:before {
   content: "\f2c0";

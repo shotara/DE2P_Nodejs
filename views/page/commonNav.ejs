@@ -1,9 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
-<body>
+
 <nav class="navbar navbar-default" id="navtop">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -15,7 +10,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-text" href="/page/index.ejs">DE2P-깊은 블로그의 시작</a>
+			<a class="navbar-text" href="/"><span class="title-text">DE2P-깊은 블로그의 시작</span></a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -28,9 +23,10 @@
 			<ul class="nav navbar-nav navbar-right">
 				<form class="navbar-form navbar-left">
 					<div class="form-group">
+
 						<input type="text" class="form-control" placeholder="Search">
+						<button class="icon"><i class="fa fa-search"></i></button>
 					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
 				</form>
 
 			<!--	<c:if test="${not empty sessionScope.deepMemberNo}"> -->
@@ -38,18 +34,18 @@
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-hidden="true"
 						aria-haspopup="true" aria-expanded="false"><i
-							class="fa fa-user-circle-o fa-2x"></i> </a>
+							class="fa fa-user-o fa-2x"></i> </a>
 						<ul class="dropdown-menu">
 
 						</ul></li>
 
 					<li class="dropdown" onclick="Member.getMyNotificationList()"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false"> <i class="fa fa-commenting-o fa-2x"></i></a>
+						aria-expanded="false"> <i class="fa fa-envelope-o fa-2x"></i></a>
 						<ul class="dropdown-menu" role="menu" data-output="notifications"></ul>
 					</li>
 
-					<li><a href="/page/index.jsp"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></li>
+					<li><a href="/page/index.jsp"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></li>
 <!--
 				</c:if>
 				<c:if test="${empty sessionScope.deepMemberNo}">
@@ -71,5 +67,3 @@
 	</div>
 	<!-- /.container-fluid -->
 </nav>
-</body>
-</html>
