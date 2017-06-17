@@ -2,17 +2,30 @@ a {
   text-decoration:none !important;
 }
 
-.navbar {
-    margin-bottom:0;
+.text-center{
+  text-align: center;
 }
 
 .subnav {
-   margin:0;
+  margin-bottom:0;
+  margin:0;
   top: 0px;
   z-index: 1020;
-  background-color: rgb(247,247,247);
+  background-color: white;
   border-bottom: 1px solid #E1E1E1;
-  padding: 8px 0px 0px 0px;
+}
+
+.subnav ul{
+  list-style: none;
+  display: inline-block;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.subnav ul li{
+  border : none;
+  float : left;
+  vertical-align: middle;
 }
 
 .subnav.affix {
@@ -20,6 +33,24 @@ a {
     top: 0;
     width: 100%;
     z-index:10;
+}
+
+.subnav .subA {
+    display:-moz-inline-stack;  /*FF2*/
+    float : inherit;
+    font-size: 1.2em;
+    text-align:center;
+    text-decoration:none;
+}
+
+.subnav .subA : now {
+  color:#fff !important;
+  background-color:#4a3c89 !important;
+}
+
+.subnav .subA : hover, .subnav .subA : focus {
+  color:#fff !important;
+  background-color:#4a3c89 !important;
 }
 
 .title-text {
@@ -35,4 +66,47 @@ width: 15%;
 color: #4f5b66;
 position: absolute;
 z-index: 1;
+}
+
+.list {
+  top : 10px;
+}
+
+.deepFeed {
+  background-color : #fff;
+  border : 1px #e2e2e2 solid;
+  width:100%;
+  height: 250px;
+  box-shadow: 1px 1px 1px #e2e2e2;
+}
+
+.deepFeed .left {
+  background-image: url('https://s3-ap-northeast-1.amazonaws.com/deep-test2/member/w5FlVzIbbwMM1496/2rAOq504wPHVmGZW');
+  background-size : cover;
+  height: 100%;
+  padding : 0;
+}
+
+.deepFeed .coverPic{
+  background-color : rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  padding : 0;
+  margin: 0;
+}
+
+.deepFeed .title {
+  color:rgb(240,240,240);
+  font-size : 1.1em;
+  text-align: center;
+  padding-top : 25%;
+}
+
+.deepFeed .right {
+  height: 100%;
+  background-color: #fff;
+}
+
+.deepFeed .title-Black {
+  
 }

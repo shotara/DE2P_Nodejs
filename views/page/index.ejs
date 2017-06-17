@@ -12,20 +12,38 @@
 <%- include commonNav %>
 <%- include commonSubNav %>
 
-	<section id="indexFeed" class="section" data-type="feed">
-	<div class="container">
-		<div class="list" data-type="feed">
-			<c:forEach var="i" items="${requestScope.outputFeedList}">
-		<!--	<div class="row<c:if test="${i.outputPostType == 1}"> notice</c:if>" onclick="Feed.goView('${i.outputFeedNo}')"> -->
-			</div>
-			</c:forEach>
+<section id="indexFeed" class="section" data-type="feed">
+	<div class="container-fluid">
+		<div class="col-xs-2 col-md-3">
+		</div>
+		<div class="col-xs-8 col-md-6 list" data-type="feed">
+		<!--c:forEach var="i" items="${requestScope.outputFeedList}"-->
+			 <div class="deepFeed">
+				 <div class="left col-xs-5 col-md-5">
+					 <div class="coverPic">
+					 <div class="title">
+						 <span class="char">sample feed title</span>
+					 </div>
+				 </div>
+				 </div>
+				 <div class="right col-xs-7 col-md-7">
+					 <div class="content-top">
+						 <span class="title-black">여기에 바로 이렇게 본문이 들어가는 부분입니다 여러분!</span>
+					 </div>
+					 <div class="content-bottom">
+					 </div>
+				 </div>
+			 </div>
+			<!--/c:forEach-->
+		</div>
+		<div class="col-xs-2 col-md-3 rightInfo">
 		</div>
 	</div>
 
-	</section>
-
-	<section class="indexRecommend">
 </section>
+
+<div class="footer">
+</div>
 
 </body>
 </html>
